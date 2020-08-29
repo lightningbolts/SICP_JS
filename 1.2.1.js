@@ -17,3 +17,26 @@ function print_star(n, c) {
 }
 console.log(factorial(10))
 ///print_star(50)
+
+function plus_recursive(a, b) {
+    if (a === 0) {
+        return b;
+    } else {
+        return inc(plus_recursive(dec(a), b))
+    }
+}
+function plus_iterative(a, b) {
+    if (a === 0) {
+        return b
+    } else {
+        return plus_iterative(dec(a), inc(b))
+    }
+}
+function inc(c) {
+    return c + 1
+}
+function dec(d) {
+    return d - 1
+}
+console.log(plus_recursive(4, 5))
+console.log(plus_iterative(4, 5))
