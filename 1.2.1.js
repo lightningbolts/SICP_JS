@@ -1,14 +1,14 @@
-function factorial(n) {
+const factorial = (n) => {
     print_star(n, "#");
     if (n === 1) {
         return n
     } else {
-        factorial_n = n * factorial(n-1);
+        factorial_n = n * factorial(n - 1);
         return factorial_n
-    }   
+    }
 }
 
-function print_star(n, c) {
+const print_star = (n, c) => {
     s = "";
     for (i = 1; i <= n; i++) {
         s += c;
@@ -18,30 +18,28 @@ function print_star(n, c) {
 console.log(factorial(10))
 ///print_star(50)
 
-function plus_recursive(a, b) {
+const plus_recursive = (a, b) => {
     if (a === 0) {
         return b;
     } else {
         return inc(plus_recursive(dec(a), b))
     }
 }
-function plus_iterative(a, b) {
+const plus_iterative = (a, b) => {
     if (a === 0) {
         return b
     } else {
         return plus_iterative(dec(a), inc(b))
     }
 }
-function inc(c) {
-    return c + 1
-}
-function dec(d) {
-    return d - 1
-}
+const inc = (c) => c + 1
+
+const dec = (d) => d - 1
+
 //console.log(plus_recursive(4, 5))
 //console.log(plus_iterative(4, 5))
 
-function A(x, y) {
+const A = (x, y) => {
     if (y === 0) {
         return 0
     } else if (x === 0) {
@@ -49,7 +47,8 @@ function A(x, y) {
     } else if (y === 1) {
         return 2
     } else {
-        A((x - 1), A(x, y-1))
+        A((x - 1), A(x, y - 1))
     }
 }
 console.log(A(5, 2))
+

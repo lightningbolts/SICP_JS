@@ -46,7 +46,6 @@
 
 (define (arrow2 n)
   (arrow n (arrow n n)))
-(trace arrow2)
 
 
   
