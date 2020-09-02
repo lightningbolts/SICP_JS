@@ -9,3 +9,28 @@
           1
           (+ (fib (- n 1)) (fib (- n 2))))))
 (trace fib)
+
+(define (count_change amount)
+  (cc amount 5))
+
+(define (cc amount kinds_of_coins)
+            (if (= amount 0)
+                1
+                (if (or (< amount 0) (= kinds_of_coins 0))
+                    0
+                    (+ (cc amount (- kinds_of_coins 1)) (cc (- amount (first_denomination kinds_of_coins)) kinds_of_coins)))))
+
+(define (first_denomination kinds_of_coins)
+                            (if (= kinds_of_coins 1)
+                                1
+                                (if (= kinds_of_coins 2)
+                                    5
+                                    (if (= kinds_of_coins 3)
+                                        10
+                                        (if (= kinds_of_coins 4)
+                                            25
+                                            (if (= kinds_of_coins 5)
+                                                50
+                                                0))))))
+(trace count_change)
+                        
