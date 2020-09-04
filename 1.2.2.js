@@ -13,10 +13,10 @@ const fib = n => {
     return fib_iter(1, 0, n)
 }
 
-const fib_iter = (a, b, count) => {
+const fib_iter = (p2, p1, count) => {
     return count === 0
-        ? b
-        : fib_iter(a + b, a, count - 1)
+        ? p2
+        : fib_iter(p1, p1 + p2, count - 1)
 }
 
 function count_change(amount) {
@@ -51,4 +51,26 @@ function first_denomination(kinds_of_coins) {
 
 //console.log(fib1(87))
 //console.log(fib(87))
-console.log(count_change(100))
+//console.log(count_change(100))
+
+//Exercise 1.11
+
+function f(n) {
+    if (n < 3) {
+        return n
+    } else {
+        return f(n - 1) + 2 * f(n - 2) + 3 * f(n - 3)
+    }
+}
+
+function f2(n) {
+    return f2_iter(n, count)
+}
+
+function f2_iter(p3, p2, p1, count) {
+    return count === 0
+        ? p3
+        : f2_iter(p1, p1 + p2, p2 + p3, count - 1) + 
+}
+
+console.log(f(5))
