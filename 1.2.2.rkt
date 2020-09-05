@@ -33,4 +33,19 @@
                                                 50
                                                 0))))))
 (trace count_change)
+
+(define (f n)
+  (if (< n 3)
+      n
+      (+ (f (- n 1)) (* (f (- n 2)) 2) (* (f (- n 3)) 3))))
+
+
+(define (f2 n)
+  (f2_iter 0 1 2 n))
+
+(define (f2_iter p3 p2 p1 count)
+  (if (= count 0)
+      p3
+      (f2_iter p2 p1 (+ p1 (* 2 p2) (* 3 p3)) (- count 1))))
+
                         

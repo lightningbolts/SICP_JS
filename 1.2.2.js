@@ -63,14 +63,17 @@ function f(n) {
     }
 }
 
+console.log(f(6))
+
 function f2(n) {
-    return f2_iter(n, count)
+    return f2_iter(0, 1, 2, n)
 }
 
 function f2_iter(p3, p2, p1, count) {
-    return count === 0
-        ? p3
-        : f2_iter(p1, p1 + p2, p2 + p3, count - 1) + 
+    if (count === 0) {
+        return p3
+    } else {
+        return f2_iter(p2, p1, p1 + 2 * p2 + 3 * p3, count - 1)
+    }
 }
-
-console.log(f(5))
+console.log(f2(6))
