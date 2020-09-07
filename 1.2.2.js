@@ -63,7 +63,7 @@ function f(n) {
     }
 }
 
-console.log(f(6))
+//console.log(f(6))
 
 function f2(n) {
     return f2_iter(0, 1, 2, n)
@@ -76,4 +76,22 @@ function f2_iter(p3, p2, p1, count) {
         return f2_iter(p2, p1, p1 + 2 * p2 + 3 * p3, count - 1)
     }
 }
-console.log(f2(6))
+//console.log(f2(6))
+
+function pascal(r, c) {
+    if (r >= c) {
+        if (r === c || c === 0) {
+            return 1
+        } else {
+            return pascal(r - 1, c - 1) + pascal(r - 1, c)
+        }
+    } else {
+        console.log("Error! Invalid request. Arguments are not valid. The second argument has to be <= the first. Have a good day!")
+    }
+}
+console.log(pascal(25, 9))
+
+function pascal2(r, c) {
+    return pascal2_iter(1, 2, count)
+} 
+
