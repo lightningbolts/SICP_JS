@@ -1,7 +1,6 @@
 #lang racket
 
 (require racket/trace)
-
 (define (fib n)
   (if (= n 0)
       0
