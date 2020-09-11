@@ -1,8 +1,8 @@
 #lang racket
-(define (expt1 b n)
+(define (expt b n)
   (if (= n 0)
       1
-      (* b (expt1 b (- n 1)))))
+      (* b (expt b (- n 1)))))
 
 (define (expt2 b n)
   (if (>= n 0)
@@ -27,5 +27,3 @@
 (define (square x)
   (* x x))
 
-(define (built_in_expt b n)
-  (expt b n))
