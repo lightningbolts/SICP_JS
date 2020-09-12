@@ -11,11 +11,11 @@ function expt2(b, n) {
     if (n >= 0) {
         return expt2_iter(b, n, 1)
     } else {
-        return 1/(expt2_iter(b, -n, 1))
+        return 1 / (expt2_iter(b, -n, 1))
     }
 }
 
-function expt2_iter(b, counter, product) {        
+function expt2_iter(b, counter, product) {
     if (counter === 0) {
         return product
     } else {
@@ -29,7 +29,7 @@ function fast_expt(b, n) {
         return 1
     } else {
         if (even(n)) {
-            return square(fast_expt(b, n/2))
+            return square(fast_expt(b, n / 2))
         } else {
             return b * fast_expt(b, n - 1)
         }
@@ -39,5 +39,22 @@ const square = x => x * x
 
 function even(n) {
     return n % 2 === 0
-} 
-console.log(fast_expt(1, 2))
+}
+//console.log(fast_expt(1, 2))
+
+function even_faster_expt(b, n) {
+    return even_faster_expt_iter(b, n, 1)
+}
+
+function even_faster_expt_iter(b, counter, product) {
+    if (counter === 0) {
+        return product
+    } else {
+        if (even(counter)) {
+            return even_faster_expt_iter(square(b), counter / 2, product)
+        } else {
+            return even_faster_expt_iter(square(b), (counter - 1)/2, product * b)
+        }
+    }
+}
+console.log(even_faster_expt(5, 2))

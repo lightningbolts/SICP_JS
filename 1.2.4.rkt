@@ -29,3 +29,13 @@
 
 (define (built_in_expt b n)
   (expt b n))
+
+(define (even_faster_expt b n)
+  (even_faster_expt_iter b n 1))
+
+(define (even_faster_expt_iter b counter product)
+  (if (= counter 0)
+      product
+      (if (even counter)
+          (even_faster_expt_iter (square b) (/ counter 2) product)
+          (even_faster_expt_iter (square b) (/ (- counter 1) 2) (* product b)))))
