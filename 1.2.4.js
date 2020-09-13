@@ -53,8 +53,52 @@ function even_faster_expt_iter(b, counter, product) {
         if (even(counter)) {
             return even_faster_expt_iter(square(b), counter / 2, product)
         } else {
-            return even_faster_expt_iter(square(b), (counter - 1)/2, product * b)
+            return even_faster_expt_iter(b, counter - 1, product * b)
         }
     }
 }
-console.log(even_faster_expt(5, 2))
+//console.log(even_faster_expt(5, 2))
+
+function times(a, b) {
+    if (b === 0) {
+        return 0
+    } else {
+        return a + times(a, b - 1)
+    }
+}
+//console.log(times(1, 0))
+
+function times_log(a, b) {
+    if (b === 0) {
+        return 0
+    } else {
+        if (even(b)) {
+            return double(times_log(a, b / 2))
+        } else {
+            return a + times_log(a, b - 1)
+        }
+    }
+}
+
+function times_log2(a, b) {
+    return times_log2_iter(a, b, 0)
+}
+
+function times_log2_iter(a, counter, sum) {
+    if (counter === 0) {
+        return sum
+    } else {
+        if (even(counter)) {
+            return times_log2_iter(double(a), counter / 2, sum)
+        } else {
+            return times_log2_iter(a, counter - 1, sum + a)
+        }
+    }
+}
+console.log(times_log2(85, 85))
+
+
+function double(x) {
+    return 2 * x
+} 
+//console.log(times_log(1, 0)) 

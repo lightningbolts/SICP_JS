@@ -38,4 +38,32 @@
       product
       (if (even counter)
           (even_faster_expt_iter (square b) (/ counter 2) product)
-          (even_faster_expt_iter (square b) (/ (- counter 1) 2) (* product b)))))
+          (even_faster_expt_iter b (- counter 1) (* product b)))))
+
+(define (times a b)
+  (if (= b 0)
+      0
+      (+ a (times a (- b 1)))))
+
+(define (times_log a b)
+  (cond
+    [(= b 0) 0]
+    [(even b) (double (times_log a (/ b 2)))]
+    [(+ a (times_log a (- b 1)))]
+    ))
+
+(define (double x)
+  (* 2 x))
+
+(define (times_log2 a b)
+  (times_log2_iter a b 0))
+
+(define (times_log2_iter a counter sum)
+  (cond
+    [(= counter 0) sum]
+    [(even counter) (times_log2_iter (double a) (/ counter 2) sum)]
+    [(times_log2_iter a (- counter 1) (+ sum a))]))
+  
+
+
+
