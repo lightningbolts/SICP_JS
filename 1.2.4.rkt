@@ -63,6 +63,16 @@
     [(= counter 0) sum]
     [(even counter) (times_log2_iter (double a) (/ counter 2) sum)]
     [(times_log2_iter a (- counter 1) (+ sum a))]))
+
+(define (fib n)
+  (fib_iter 1 0 0 1 n))
+
+(define (fib_iter a b p q count)
+  (if (= count 0)
+      b
+      (if (even count)
+          (fib_iter a b (+ (* p p) (* q q)) (+ (* q q) (* 2 p q)) (/ count 2))
+          (fib_iter (+ (* b q) (* a q) (* a p)) (+ (* b p) (* a q)) p q (- count 1)))))
   
 
 

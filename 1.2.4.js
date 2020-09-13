@@ -95,10 +95,27 @@ function times_log2_iter(a, counter, sum) {
         }
     }
 }
-console.log(times_log2(85, 85))
+//console.log(times_log2(85, 85))
 
 
 function double(x) {
     return 2 * x
-} 
+}
 //console.log(times_log(1, 0)) 
+
+function fib(n) {
+    return fib_iter(1, 0, 0, 1, n)
+}
+
+function fib_iter(a, b, p, q, count) {
+    if (count === 0) {
+        return b
+    } else {
+        if (even(count)) {
+            return fib_iter(a, b, p * p + q * q, q * q + 2 * p * q, count / 2)
+        } else {
+            return fib_iter(b * q + a * q + a * p, b * p + a * q, p, q, count - 1)
+        }
+    }
+}
+console.log(fib(89435))
