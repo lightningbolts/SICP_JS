@@ -118,4 +118,4 @@ function fib_iter(a, b, p, q, count) {
         }
     }
 }
-console.log(fib(89435))
+//console.log(fib(89435))
