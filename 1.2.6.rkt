@@ -1,14 +1,20 @@
 #lang racket
 
-(define (naive_prime n)
-  (define d 2)
-  (while (< d (+ (/ n 2) 1))
-         (if (= (remainder n d) 0)
-             #f
-             (set! d (+ d 1)))))
+(define (is_prime n)
+  (= n (smallest_divisor n)))
 
+(define (smallest_divisor n)
+  (find_divisor n 2))
 
-(define (while condition body)
-  (when (condition)
-    (body)
-    (while condition body)))
+(define (find_divisor n test_divisor)
+  (if (> (square test_divisor) n)
+      n
+      (if (divides test_divisor n)
+          test_divisor
+          (find_divisor n (+ test_divisor 1)))))
+
+(define (square n)
+  (* n n))
+
+(define (divides a b)
+  (= (remainder b a) 0))
