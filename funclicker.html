@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    
+    <div id="root"></div>
+    <script type="text/babel">
+        class AutoClicker extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    intervalBetweenClick: 1,
+                    autoStopAfterClickTimes: 500,
+                    autoStopAfterClickSeconds: 60,
+                    clickCount: 0,
+                    isAutoStopAfterClickTimes: false,
+                    isAutoStopAfterClickSeconds: true,
+                    intervalID: undefined
+
+                };
+            }
+
+            handleClick = () => {
+                // alert("I have been clicked!");
+                const intervalID = setInterval(() => {
+                    const newClickCount = this.state.clickCount + 1
+                    this.setState({
+                        clickCount: newClickCount
+                    })
+                    if (newClickCount > this.state.autoStopAfterClickTimes) {
+                        handleStop();
+                    }
+                }, this.state.intervalBetweenClick)
+                this.setState({ intervalID })
+            }
+
+            handleStop = () => {
+                clearInterval(this.state.intervalID);
+
+            }
+            onIntervalChange = (ev) => {
+                this.setState({ intervalBetweenClick: ev.target.value })
+            }
+            render() {
+                return (
+                    <div>
+                        <div>Auto Cliker By Kairui</div>
+                        <div>
+                            <div>
+                                <span>Interval Between Clicks</span>
+                                <input type="number" value={this.state.intervalBetweenClick} onChange={this.onIntervalChange} /> Seconds
+          </div>
+                            <div>
+                                <input type="checkbox" />
+                                <span>Auto Stop After Click</span>
+                                <input type="number" value={this.state.autoStopAfterClickTimes} /> Times
+          </div>
+                            <div>
+                                <input type="checkbox" />
+                                <span>Auto Stop After Click</span>
+                                <input type="number" value={this.state.autoStopAfterClickSeconds} /> Seconds
+          </div>
+                            <div>
+                                <span>Click Count:</span> {this.state.clickCount}
+                            </div>
+                            <div>
+                                <button onClick={this.handleClick}>Start Click</button>
+                                <button onClick={this.handleStop}>Stop Click</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <AutoClicker />,
+            document.getElementById('root')
+        );
+
+    </script>
+    <!--
+      Note: this page is a great way to try React but it's not suitable for production.
+      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
+
+      Read this section for a production-ready setup with JSX:
+      https://reactjs.org/docs/add-react-to-a-website.html#add-jsx-to-a-project
+
+      In a larger project, you can use an integrated toolchain that includes JSX instead:
+      https://reactjs.org/docs/create-a-new-react-app.html
+
+      You can also use React without JSX, in which case you can remove Babel:
+      https://reactjs.org/docs/react-without-jsx.html
+    -->
+</body>
+
+</html>

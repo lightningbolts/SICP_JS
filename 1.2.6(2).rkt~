@@ -1,0 +1,28 @@
+#lang racket
+
+(define (even n)
+  (if (= (remainder x 2)) 0))
+
+(define (square x)
+  (** x 2))
+
+(define (expmod base expt m)
+  (if (= expt 0)
+      1
+      (if (even expt)
+          (remainder (square (expmod base (/ expt 2) m)) m)
+          (remainder (* base (expmod base (- expt 1) m)) m))))
+
+(define (fermat_test n)
+  (define (try_it a)
+    (if (= (expmod a n n) a))
+    #t
+    (try_it (+ 1 (rnd (- n 1))))))
+
+(define (fast_is_prime n times)
+  (if (= times 0)
+      #t
+      (if (fermat_test n)
+          (fast_is_prime n (- times 1))
+          #f
+          )))
