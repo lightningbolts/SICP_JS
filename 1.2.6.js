@@ -23,7 +23,7 @@ function square(x) {
     return x * x
 }
 function find_divisor(n, test_divisor) {
-    console.log("A Dirty Way to Cheat")
+    //console.log("A Dirty Way to Cheat")
     if (square(test_divisor) > n) {
         return n
     } else {
@@ -85,4 +85,35 @@ function fast_is_prime(n, times) {
     }
 }
 
-console.log(fast_is_prime(14879334839, 100000))
+//console.log(fast_is_prime(561, 10000))
+//console.log(smallest_divisor(19999))
+
+function timed_prime_test(n) {
+    display(n)
+    return start_prime_test(n, get_time())
+}
+function start_prime_test(n, start_time) {
+    if (is_prime(n)) {
+        report_prime(get_time() - start_time)
+    } else {
+        true
+    }
+}
+function report_prime(elapsed_time) {
+    display(" *** ")
+    display(elapsed_time)
+}
+
+function display(n) {
+    console.log(n)
+}
+
+function get_time() {
+    return new Date().getTime()
+}
+
+console.log(timed_prime_test(1999))
+
+//function search_for_primes() {
+
+//}
