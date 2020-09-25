@@ -89,14 +89,14 @@ function fast_is_prime(n, times) {
 //console.log(smallest_divisor(19999))
 
 function timed_prime_test(n) {
-    display(n)
     return start_prime_test(n, get_time())
 }
 function start_prime_test(n, start_time) {
     if (is_prime(n)) {
         report_prime(get_time() - start_time)
+        display(n)
     } else {
-        true
+        return true
     }
 }
 function report_prime(elapsed_time) {
@@ -112,8 +112,37 @@ function get_time() {
     return new Date().getTime()
 }
 
-console.log(timed_prime_test(1999))
+//console.log(timed_prime_test(1999))
+/*
+function search_for_primes(start, times) {
+    if (times === 0) {
+        return true
+    } else {
+        if (start > 2 && start % 2 === 0) {
+            search_for_primes(start + 1, times)
+        } else {
+            if (is_undefined(timed_prime_test(start))) {
+                return search_for_primes(start + 2, times - 1)
+            } else {
+                search_for_primes(start + 2, times)
+            }
+        }
+    }
+}
+*/
+function search_for_primes(start, times) {
+    return times === 0
+        ? true
+        : start > 2 && start % 2 === 0
+            ? search_for_primes(start + 1, times)
+            // if we get undefined -> its a prime
+            : is_undefined(timed_prime_test(start)) 
+                ? search_for_primes(start + 2, times - 1)
+                : search_for_primes(start + 2, times);
+}
 
-//function search_for_primes() {
+function is_undefined(x) {
+    return x === undefined
+}
 
-//}
+console.log(search_for_primes(100000, 3))
