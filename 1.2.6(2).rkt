@@ -16,7 +16,7 @@
 (define (fermat_test n)
   (define (try_it a)
     (= (expmod a n n) a))
-  (try_it (+ 1 (random (- n 1)))))
+  (try_it (random (exact-floor n))))
 
 (define (fast_is_prime n times)
   (if (= times 0)

@@ -1,6 +1,7 @@
 
 
 const { sqrt } = require("./1.1.8")
+const { even_faster_expt } = require("./1.2.4")
 
 function naive_prime(n) {
     let d = 2
@@ -64,6 +65,9 @@ function expmod(base, expt, m) {
         }
     }
 }
+/* function expmod(base, expt, m) {
+    return even_faster_expt(base, expt) % m
+} */
 
 function fermat_test(n) {
     const a_1 = Math.floor(Math.random(n-1))
@@ -71,6 +75,22 @@ function fermat_test(n) {
         return expmod(a, n, n) === a;
     }
     return try_it(1 + a_1)
+}
+
+function carmichael_test(n) {
+    let a = 2
+    while (a < n) {
+        if (expmod(a, n, n) === a) {
+            a = a + 1
+        } else {
+            return "Not Prime."
+        }
+    }
+    if (naive_prime(n)) {
+        return "Prime Number."
+    } else {
+        return "Carmichael Number!"
+    }
 }
 
 function fast_is_prime(n, times) {
@@ -92,7 +112,7 @@ function timed_prime_test(n) {
     return start_prime_test(n, get_time())
 }
 function start_prime_test(n, start_time) {
-    if (is_prime(n)) {
+    if (fast_is_prime(n, Math.floor(Math.log(n)))) {
         report_prime(get_time() - start_time)
         display(n)
     } else {
@@ -145,4 +165,5 @@ function is_undefined(x) {
     return x === undefined
 }
 
-console.log(search_for_primes(100000, 3))
+//console.log(search_for_primes(1000000, 3))
+console.log(carmichael_test(561))
