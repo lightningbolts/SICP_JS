@@ -166,4 +166,4 @@ function is_undefined(x) {
 }
 
 //console.log(search_for_primes(1000000, 3))
-console.log(carmichael_test(561))
+//console.log(carmichael_test(561))
