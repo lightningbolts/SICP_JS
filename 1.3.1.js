@@ -61,3 +61,20 @@ function pi_sum1(a, b) {
     return name(a, b, term, next)
 }
 
+function integral(f, a, b, dx) {
+    function add_dx(x) {
+        return x + dx
+    }
+    return name(a + dx / 2, b, f, add_dx) * dx
+}
+
+//console.log(cube, 0, 1, 0.001)
+
+function simpsonRule(f, a, b, n) {
+    function term(a) {
+        return f(a + kh)
+    }
+    function next(x) {
+        return x + h
+    }
+}
