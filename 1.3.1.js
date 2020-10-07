@@ -34,6 +34,19 @@ function name(a, b, term, next) {
     }
 }
 
+function name_iter(term, a, next, b) {
+    function iter(a, result) {
+        if (a > b) {
+            return result 
+        } else {
+            return iter(next(a), term(a) + result)
+        } 
+    }
+    return iter(a, 0);
+}
+
+x
+
 function sum_integers1(a, b) {
     function term(x) {
         return x
@@ -86,7 +99,7 @@ function simpsonRule(f, a, b, n) {
 function inc(k) {
     return k + 1;
 }
-function simpsons_rule_integral(f, a, b, n) {
+/* function simpsons_rule_integral(f, a, b, n) {
     function helper(h) {
         function y(k) { 
             return f((k * h) + a);
@@ -101,6 +114,25 @@ function simpsons_rule_integral(f, a, b, n) {
         return sum(term, 0, inc, n) * (h / 3);
     }
     return helper((b - a) / n);
+} */
+
+//console.log(simpsonRule(cube, 0, 1, 1000))
+
+function factorial(n) {
+    if (n === 1) {
+        return n
+    } else {
+        return n * factorial(n - 1)     
+    }
 }
 
-console.log(simpsonRule(cube, 0, 1, 1000))
+function factorial2(n) {
+    function iter(n, product) {
+        if (n === 1) {
+            return product
+        } else {
+            return iter(n - 1, n * product)
+        }
+    }
+    return iter(n, 1)
+}

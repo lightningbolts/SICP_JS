@@ -42,5 +42,14 @@
     (+ y 4))
     (name a b term next))
 
+(define (factorial n)
+  (if (= n 1)
+      n
+      (* n (factorial (- n 1)))))
 
-
+(define (factorial2 n)
+  (define (iter n product)
+    (if (= n 1)
+        product
+        (iter (- n 1) (* n product))))
+  (iter n 1))
