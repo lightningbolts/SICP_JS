@@ -118,6 +118,14 @@ function inc(k) {
 
 //console.log(simpsonRule(cube, 0, 1, 1000))
 
+function product(a, b, term, next) {
+    if (a > b) {
+        return 1
+    } else {
+        return term(a) * product(next(a), b, term, next)
+    }
+}
+
 function factorial(n) {
     if (n === 1) {
         return n
@@ -135,4 +143,14 @@ function factorial2(n) {
         }
     }
     return iter(n, 1)
+}
+
+function factorial3(n) {
+    function term(a) {
+        return a
+    } 
+    function next(a) {
+        return a + 1
+    }
+    return product(1, n, term, next)
 }
