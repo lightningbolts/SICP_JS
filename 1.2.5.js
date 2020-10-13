@@ -5,4 +5,5 @@ function gcd(a, b) {
         return gcd(b, a % b)
     }
 }
-console.log(gcd(892734, 274))
+//console.log(gcd(892734, 274))
+module.exports = {gcd}

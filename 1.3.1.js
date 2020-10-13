@@ -1,3 +1,5 @@
+const { gcd } = require("./1.2.5")
+const { fast_is_prime } = require("./1.2.6")
 function sum_integers(a, b) {
     if (a > b) {
         return 0
@@ -37,15 +39,13 @@ function name(a, b, term, next) {
 function name_iter(term, a, next, b) {
     function iter(a, result) {
         if (a > b) {
-            return result 
+            return result
         } else {
             return iter(next(a), term(a) + result)
-        } 
+        }
     }
     return iter(a, 0);
 }
-
-x
 
 function sum_integers1(a, b) {
     function term(x) {
@@ -130,7 +130,7 @@ function factorial(n) {
     if (n === 1) {
         return n
     } else {
-        return n * factorial(n - 1)     
+        return n * factorial(n - 1)
     }
 }
 
@@ -146,11 +146,83 @@ function factorial2(n) {
 }
 
 function factorial3(n) {
+    function times(n, m) {
+        return n * m
+    }
     function term(a) {
         return a
-    } 
+    }
     function next(a) {
         return a + 1
     }
-    return product(1, n, term, next)
+    return accumulate_iter(times, 1, 1, n, term, next)
 }
+
+//console.log(factorial3(5))
+
+function accumulate(combiner, null_value, a, b, term, next) {
+    if (a > b) {
+        return null_value
+    } else {
+        return combiner(term(a), accumulate(combiner, null_value, next(a), b, term, next))
+    }
+}
+
+function accumulate_iter(combiner, null_value, a, b, term, next) {
+    function iter(a, result) {
+        if (a > b) {
+            return result
+        } else {
+            return iter(next(a), combiner(term(a), result))
+        }
+    }
+    return iter(a, null_value)
+}
+
+function filter_accumulate(combiner, null_value, a, b, term, next, filter) {
+    if (a > b) {
+        return null_value
+    } else {
+        if (filter(a)) {
+            return combiner(term(a), filter_accumulate(combiner, null_value, next(a), b, term, next, filter))
+        } else {
+            return filter_accumulate(combiner, null_value, next(a), b, term, next, filter)
+        }
+    }
+}
+
+function sum_of_prime_squares(a, b) {
+    function plus(a, b) {
+        return a + b
+    }
+    function square(a) {
+        return a * a
+    }
+    function next(a) {
+        return a + 1
+    }
+    function is_prime(n) {
+        return fast_is_prime(n, 5)
+    }
+    return filter_accumulate(plus, 0, a, b, square, next, is_prime)
+}
+//console.log(sum_of_prime_squares(1, 3))
+
+function product_relatively_prime_to_n(n) {
+    function product(a, b) {
+        return a * b
+    }
+    function term(a) {
+        return a
+    }
+    function next(a) {
+        return a + 1
+    }
+    function relative_prime(a) {
+        return gcd(a, n) === 1
+        
+    } 
+    return filter_accumulate(product, 1, 1, n, term, next, relative_prime)
+}
+console.log(product_relatively_prime_to_n(3))
+
