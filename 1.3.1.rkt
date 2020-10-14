@@ -53,3 +53,24 @@
         product
         (iter (- n 1) (* n product))))
   (iter n 1))
+
+(define (factorial3 n)
+  (define (times n m)
+    (* n m))
+  (define (term a)
+    a)
+  (define (next a)
+    (+ a 1))
+  (accumulate_iter times 1 1 n term next))
+
+(define (accumulate combiner null_value a b term next)
+  (if (> a b)
+      null_value
+      (combiner (term a) (accumulate combiner null_value next(a) b term next))))
+
+(define (accumulate_iter combiner null_value a b term next)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (combiner (term a) result))))
+    (iter a null_value))
