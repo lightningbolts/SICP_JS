@@ -49,6 +49,26 @@ function half_interval_method(f, a, b) {
             ? search(f, b, a)
             : error("values are not of opposite sign");
 }
+const tolerance = 0.00001;
+function fixed_point(f, first_guess) {
+    function close_enough(x, y) {
+        return Math.abs(x - y) < tolerance;
+    }
+    function try_with(guess, count) {
+        const next = f(guess);
+        console.log(next)
+        console.log(count)
+        return close_enough(guess, next)
+            ? next
+            : try_with(next, count + 1);
+    }
+    return try_with(first_guess, 1);
+}
 
+function counter(x) {
+    console.log(x => x + 1)
+}
+console.log(fixed_point(x => Math.log(1000) / Math.log(x), 2))
+console.log(fixed_point(x => 1 / 2 * (Math.log(1000) / Math.log(x) + x), 2))
 //console.log(half_interval_method(Math.sin, 2, 4));
-console.log(half_interval_method(x => x * x * x - 2 * x - 3, 1, 2))
+//console.log(half_interval_method(x => x * x * x - 2 * x - 3, 1, 2))
