@@ -68,7 +68,20 @@ function fixed_point(f, first_guess) {
 function counter(x) {
     console.log(x => x + 1)
 }
-console.log(fixed_point(x => Math.log(1000) / Math.log(x), 2))
-console.log(fixed_point(x => 1 / 2 * (Math.log(1000) / Math.log(x) + x), 2))
+//console.log(fixed_point(x => Math.log(1000) / Math.log(x), 2))
+//console.log(fixed_point(x => 1 / 2 * (Math.log(1000) / Math.log(x) + x), 2))
 //console.log(half_interval_method(Math.sin, 2, 4));
 //console.log(half_interval_method(x => x * x * x - 2 * x - 3, 1, 2))
+
+function cont_frac(n, d, k) {
+    function helper_func(i) {
+        if (i > k) {
+            return 0
+        } else {
+            return n(i) / (d(i) + helper_func(i + 1))
+        }
+    }
+    return helper_func(1)
+}
+
+console.log(cont_frac(i => 1, i => 1, 50))
