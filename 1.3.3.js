@@ -73,15 +73,46 @@ function counter(x) {
 //console.log(half_interval_method(Math.sin, 2, 4));
 //console.log(half_interval_method(x => x * x * x - 2 * x - 3, 1, 2))
 
-function cont_frac(n, d, k) {
-    function helper_func(i) {
+function cont_frac(fn, fd, k) {
+    function helper(i) {
         if (i > k) {
             return 0
         } else {
-            return n(i) / (d(i) + helper_func(i + 1))
+            return fn(i) / (fd(i) + helper(i + 1))
         }
     }
-    return helper_func(1)
+    return helper(1)
+}
+//console.log(cont_frac(i => 1, i => 1, 3))
+
+function cont_frac_iter(fn, fd, k) {
+    function iter(i, frac) {
+        if (i === 0) {
+            return frac
+        } else {
+            return iter(i - 1, fn(i) / (fd(i) + frac))
+        }
+    }
+    return iter(k, 0)
+}
+function cont_frac_i(n, d, k) {
+    function fraction(i, current) {
+        return i === 0
+               ? current
+               : fraction(i - 1, n(i) / (d(i) + current));
+    }
+    return fraction(k, 0);
 }
 
-console.log(cont_frac(i => 1, i => 1, 50))
+//console.log(cont_frac_iter(i => 1, i => 1, 3))
+
+function D(i) {
+    if (i < 3) {
+        return i
+    } else if (i % 3 === 0 || i % 3 === 1) {
+        return 1
+    } else {
+        return D(i - 3) + 2
+    }
+}
+console.log(cont_frac_iter(i => 1, D, 300))
