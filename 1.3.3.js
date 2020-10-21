@@ -95,14 +95,7 @@ function cont_frac_iter(fn, fd, k) {
     }
     return iter(k, 0)
 }
-function cont_frac_i(n, d, k) {
-    function fraction(i, current) {
-        return i === 0
-               ? current
-               : fraction(i - 1, n(i) / (d(i) + current));
-    }
-    return fraction(k, 0);
-}
+
 
 //console.log(cont_frac_iter(i => 1, i => 1, 3))
 
@@ -115,4 +108,44 @@ function D(i) {
         return D(i - 3) + 2
     }
 }
-console.log(cont_frac_iter(i => 1, D, 300))
+//console.log(cont_frac_iter(i => 1, D, 300))
+
+function cont_frac_iter_sub(fn, fd, k) {
+    function iter(i, frac) {
+        if (i === 0) {
+            return frac
+        } else {
+            return iter(i - 1, fn(i) / (fd(i) - frac))
+        }
+    }
+    return iter(k, 0)
+}
+
+function tan_cf(x, k) {
+    function fn(i) {
+        if (i === 1) {
+            return x
+        } else {
+            return x * x
+        }
+    }
+    function fd(i) {
+        return 2 * i - 1
+    }
+    return cont_frac_sub(fn, fd, k)
+} 
+function cont_frac_sub(fn, fd, k) {
+    function helper(i) {
+        if (i > k) {
+            return 0
+        } else {
+            return fn(i) / (fd(i) - helper(i + 1))
+        }
+    }
+    return helper(1)
+}
+console.log(tan_cf(convert_radians(180), 14))
+
+function convert_radians(x) {
+    return x * Math.PI / 180.0
+}
