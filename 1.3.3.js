@@ -133,7 +133,7 @@ function tan_cf(x, k) {
         return 2 * i - 1
     }
     return cont_frac_sub(fn, fd, k)
-} 
+}
 function cont_frac_sub(fn, fd, k) {
     function helper(i) {
         if (i > k) {
@@ -144,8 +144,9 @@ function cont_frac_sub(fn, fd, k) {
     }
     return helper(1)
 }
-console.log(tan_cf(convert_radians(180), 14))
+//console.log(tan_cf(convert_radians(180), 14))
 
 function convert_radians(x) {
     return x * Math.PI / 180.0
 }
+module.exports = { fixed_point }
