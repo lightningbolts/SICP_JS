@@ -121,5 +121,5 @@ function fib_iter(a, b, p, q, count) {
 //console.log(fib(89435))
 
 module.exports = {
-    even_faster_expt
+    even_faster_expt, fast_expt
 }
