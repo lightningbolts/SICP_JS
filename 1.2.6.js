@@ -77,6 +77,8 @@ function fermat_test(n) {
     return try_it(1 + a_1)
 }
 
+console.log("91 is prime? ", fermat_test(91))
+
 function carmichael_test(n) {
     let a = 2
     while (a < n) {

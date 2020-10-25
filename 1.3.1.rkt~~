@@ -42,20 +42,6 @@
     (+ y 4))
     (name a b term next))
 
-(define (accumulate combiner null_value a b term next)
-  (cond
-    [(> a b) null_value]
-    [else (combiner (term a) (accumulate combiner null_value (next a) b term next))]))
-
-(define (filter_accumulate combiner null_value a b term next filter)
-  (if (> a b)
-      null_value
-      (if (filter a)
-          (combiner (term a) (filter_accumulate combiner null_value a b term next filter))
-          (filter_accumulate combiner null_value (next a) b term next filter))))
-          
-  
-
 (define (factorial n)
   (if (= n 1)
       n

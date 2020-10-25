@@ -74,3 +74,49 @@
         result
         (iter (next a) (combiner (term a) result))))
     (iter a null_value))
+
+(define (filter_accumulate combiner null_value a b term next filter)
+  (if (> a b)
+      null_value
+      (if (filter a)
+          (combiner (term a) (filter_accumulate combiner null_value (next a) b term next filter))
+          (filter_accumulate combiner null_value (next a) b term next filter))))
+
+(define (sum_of_prime_squares a b)
+  (define (plus a b)
+    (+ a b))
+  (define (square a)
+    (* a a))
+  (define (next a)
+    (+ a 1))
+  (define (is_prime n)
+    (fast_is_prime n 5))
+  (filter_accumulate plus 0 a b square next is_prime))
+
+(define (even n)
+  (= (remainder n 2) 0))
+
+(define (square x)
+  (* x x))
+
+(define (expmod base expt m)
+  (if (= expt 0)
+      1
+      (if (even expt)
+          (remainder (square (expmod base (/ expt 2) m)) m)
+          (remainder (* base (expmod base (- expt 1) m)) m))))
+
+(define (fermat_test n)
+  (define (try_it a)
+    (= (expmod a n n) a))
+  (if (= n 2)
+      #t
+      (try_it (random 2 n))))
+
+(define (fast_is_prime n times)
+  (if (= times 0)
+      #t
+      (if (fermat_test n)
+          (fast_is_prime n (- times 1))
+          #f
+          )))
