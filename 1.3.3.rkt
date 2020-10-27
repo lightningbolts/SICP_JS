@@ -12,7 +12,7 @@
 (define (abs x)
   (if (>= x 0)
       x
-      (negate x)))
+      (- 0 x)))
 
 (define (close_enough x y)
   (< (abs (- x y)) 0.00000001))
@@ -90,7 +90,10 @@
     (> i k)
     0
     (- (/ (fn i) (fd i)) (helper (+ i 1))))
-  (helper 1))  
+  (helper 1))
+
+(define (cube_polynomial x)
+  (- (* x x x) (* 2 x) 3))
 
 
     

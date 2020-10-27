@@ -62,7 +62,7 @@
   (fixed_point (newton_transform g) guess))
 
 (define (cube x)
-  (* x (* x x)))
+  (* x x x))
 
 (define (cubic a b c)
   (lambda x
@@ -118,4 +118,8 @@
 
 (define (average2 x y)
   (/ (+ x y) 2))
+
+(define (function y)
+  (lambda y
+    (- (cube y) 4))) 
 

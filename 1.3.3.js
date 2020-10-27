@@ -108,7 +108,7 @@ function D(i) {
         return D(i - 3) + 2
     }
 }
-//console.log(cont_frac_iter(i => 1, D, 300))
+console.log(cont_frac_iter(i => 1, D, 300))
 
 function cont_frac_iter_sub(fn, fd, k) {
     function iter(i, frac) {

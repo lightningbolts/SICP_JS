@@ -109,9 +109,9 @@
 (define (fermat_test n)
   (define (try_it a)
     (= (expmod a n n) a))
-  (if (= n 2)
-      #t
-      (try_it (random 2 n))))
+  (if (= n 1)
+      #f
+      (try_it (random 1 n))))
 
 (define (fast_is_prime n times)
   (if (= times 0)
@@ -120,3 +120,4 @@
           (fast_is_prime n (- times 1))
           #f
           )))
+

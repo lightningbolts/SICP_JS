@@ -206,7 +206,7 @@ function sum_of_prime_squares(a, b) {
     }
     return filter_accumulate(plus, 0, a, b, square, next, is_prime)
 }
-//console.log(sum_of_prime_squares(1, 3))
+console.log(sum_of_prime_squares(1, 3))
 
 function product_relatively_prime_to_n(n) {
     function product(a, b) {
@@ -224,5 +224,5 @@ function product_relatively_prime_to_n(n) {
     } 
     return filter_accumulate(product, 1, 1, n, term, next, relative_prime)
 }
-console.log(product_relatively_prime_to_n(3))
+//console.log(product_relatively_prime_to_n(3))
 

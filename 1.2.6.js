@@ -65,19 +65,22 @@ function expmod(base, expt, m) {
         }
     }
 }
+
+function random(n) {
+    return Math.floor(Math.random() * n)
+}
 /* function expmod(base, expt, m) {
     return even_faster_expt(base, expt) % m
 } */
 
 function fermat_test(n) {
-    const a_1 = Math.floor(Math.random(n-1))
     function try_it(a) {
+        console.log('selected a: ', a);
         return expmod(a, n, n) === a;
     }
-    return try_it(1 + a_1)
+    return try_it(1 + random(n - 1))
 }
 
-console.log("91 is prime? ", fermat_test(91))
 
 function carmichael_test(n) {
     let a = 2

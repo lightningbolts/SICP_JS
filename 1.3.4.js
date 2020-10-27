@@ -18,7 +18,7 @@ function newton_method(g, guess) {
     return fixed_point(newton_transform(g), guess)
 }
 
-//console.log(newton_method(y => cube(y) - 1000000000000, 10000))
+console.log(newton_method(y => cube(y) - 4, 1))
 function cube(x) {
     return x * x * x
 }
@@ -108,7 +108,7 @@ function sqrt_new(n) {
     return iterative_improve(good_enough, improve_guess)(1)
 }
 
-console.log(sqrt_new(4))
+//console.log(sqrt_new(4))
 
 function average2(x, y) {
     return (x + y) / 2
