@@ -40,13 +40,16 @@
 (define tolerance 0.00000001)
 
 (define (fixed_point f first_guess)
-  (define (try_with guess count)
+  (define (try_with guess)
     (define next (f guess))
     (if (close_enough guess next)
         next
-        (try_with next (+ count 1))))
-  (try_with first_guess 1))
+        (try_with next)))
+  (try_with first_guess))
 
+
+(define (test_fn y)
+  (- (cube y) 27))
 
 (define (deriv gx)
   (define dx 0.00000001)
