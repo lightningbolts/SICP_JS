@@ -18,7 +18,7 @@ function newton_method(g, guess) {
     return fixed_point(newton_transform(g), guess)
 }
 
-console.log(newton_method(y => cube(y) - 4, 1))
+//console.log(newton_method(y => cube(y) - 27, 1))
 function cube(x) {
     return x * x * x
 }
@@ -26,7 +26,7 @@ function cube(x) {
 function cubic(a, b, c) {
     return x => cube(x) + a * x * x + b * x + c
 }
-//console.log(newton_method(cubic(0, 0, -27), 1))
+console.log(newton_method(cubic(0, 0, 1), 1))
 
 function double(func) {
     return x => func(func(x))

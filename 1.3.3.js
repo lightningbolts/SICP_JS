@@ -56,8 +56,8 @@ function fixed_point(f, first_guess) {
     }
     function try_with(guess, count) {
         const next = f(guess);
-        console.log(next)
-        console.log(count)
+        //console.log(next)
+        //console.log(count)
         return close_enough(guess, next)
             ? next
             : try_with(next, count + 1);
@@ -108,7 +108,7 @@ function D(i) {
         return D(i - 3) + 2
     }
 }
-console.log(cont_frac_iter(i => 1, D, 300))
+//console.log(cont_frac_iter(i => 1, D, 300))
 
 function cont_frac_iter_sub(fn, fd, k) {
     function iter(i, frac) {

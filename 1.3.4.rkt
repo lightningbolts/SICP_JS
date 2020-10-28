@@ -11,7 +11,7 @@
 (define (abs x)
   (if (>= x 0)
       x
-      (negate x)))
+      (- 0 x)))
 
 (define (close_enough x y)
   (< (abs (- x y)) 0.00000001))
@@ -50,31 +50,35 @@
 
 (define (deriv gx)
   (define dx 0.00000001)
-  (define (dg x)
+  (define (fgx x)
     (/ (- (gx (+ x dx)) (gx x)) dx))
-  dg)
+  fgx)
 
 (define (newton_transform g)
-  (lambda x
-    (/ (- x (g x)) (deriv g) x)))
+  (define (fun x)
+    (/ (- x (g x)) ((deriv g) x)))
+  fun)
 
 (define (newton_method g guess)
   (fixed_point (newton_transform g) guess))
 
 (define (cube x)
-  (* x x x))
+  (* x (* x x)))
 
 (define (cubic a b c)
-  (lambda x
-    (+ (cube x) (+ (* a (* x x)) (+ (* b x) c)))))
+  (define (fabc x)
+    (+ (cube x) (+ (* a (* x x)) (+ (* b x) c))))
+  fabc)
 
 (define (double func)
-  (lambda x
-    (func (func x))))
+  (define (df x)
+    (func (func x)))
+  df)
 
 (define (compose f g)
-  (lambda x
-    (f (g x))))
+  (define (ffg x)
+    (f (g x)))
+  ffg)
 
 (define (counter n)
   (+ n 1))
@@ -94,8 +98,9 @@
   (/ (+ x (+ y z)) 3))
 
 (define (smooth f dx)
-  (lambda x
-    (average3 (f (- x dx)) (f x) (f (+ x dx)))))
+  (define (ffdx x)
+    (average3 (f (- x dx)) (f x) (f (+ x dx))))
+  ffdx)
 
 (define (n_root n times value)
   (define (average_damp x)
@@ -103,10 +108,11 @@
   (fixed_point (repeated average_damp times) 1))
 
 (define (iterative_improve good_enough improve_guess)
-  (lambda guess
+  (define (guesses guess)
     (if (good_enough guess)
         guess
-        (iterative_improve good_enough improve_guess (improve_guess guess)))))
+        (iterative_improve good_enough improve_guess (improve_guess guess))))
+  guesses)
 
 (define (sqrt_new n)
   (define (good_enough x)
@@ -120,6 +126,7 @@
   (/ (+ x y) 2))
 
 (define (function y)
-  (lambda y
-    (- (cube y) 4))) 
+  (define (fy y)
+    (- (cube y) 4))
+  fy)
 
