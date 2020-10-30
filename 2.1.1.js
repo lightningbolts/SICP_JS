@@ -1,15 +1,38 @@
 //Start of Chapter 2
-
-function make_rat(x, y) {
+const { gcd } = require("./1.2.5")
+function pair(x, y) {
     return [x, y]
 }
 
+function head(x) {
+    return x[0] 
+}
+
+function tail(x) {
+    return x[1]
+}
+
+function sign(x) {
+    if (x < 0) {
+        return -1
+    } else if (x === 0) {
+        return 0
+    } else {
+        return 1
+    }
+}
+
+function make_rat(x, y) {
+    const g = gcd(x, y)
+    return pair(sign(x) * sign(y) * Math.abs(x / g), Math.abs(y / g))
+}
+
 function numer(x) {
-    return x[0]
+    return head(x)
 }
 
 function denom(x) {
-    return x[1]
+    return tail(x)
 }
 
 function display_frac(x) {
@@ -36,4 +59,8 @@ function equal_rat(x, y) {
     return numer(x) * denom(y) === numer(y) * denom(x)
 }
 
-console.log(display_frac(equal_rat(make_rat(1, 2), make_rat(1, 2))))
+//console.log(display_frac(add_rat(make_rat(-1, -2), make_rat(1, 2))))
+console.log(display_frac(make_rat(1, 2)))
+console.log(display_frac(make_rat(1, -3)))
+
+//console.log(equal_rat(make_rat(1, 2), make_rat(1, 3)))
