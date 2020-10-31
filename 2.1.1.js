@@ -64,3 +64,5 @@ console.log(display_frac(make_rat(1, 2)))
 console.log(display_frac(make_rat(1, -3)))
 
 //console.log(equal_rat(make_rat(1, 2), make_rat(1, 3)))
+
+module.exports = {pair, head, tail}
