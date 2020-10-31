@@ -67,4 +67,5 @@ function area(rec) {
     const [width, height] = get_w_h(rec)
     return width * height
 }
-console.log(area(rectangle(make_point(0, 0), make_point(10, 10))))
+//console.log(area(rectangle(make_point(0, 0), make_point(10, 10))))
+
