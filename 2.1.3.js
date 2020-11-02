@@ -34,4 +34,35 @@ function tail1(c) {
     return get_num(c, 0, 3)
 }
 
-console.log(tail1(pair1(2, 1)))
+//console.log(tail1(pair1(2, 1)))
+//Exercise 2.6
+
+const zero = f => x => x;
+function add_1(n) {
+    return f => x => f(n(f)(x));
+}
+
+function inc(x) {
+    return x + 1
+}
+
+function id(x) {
+    return x
+}
+
+const one = f => x => f(x)
+const two = f => x => f(f(x))
+
+function plus(m, n) {
+    return f => x => m(f)(n(f)(x))
+}
+
+const three = plus(one, two)
+const five = plus(two, three)
+
+function church_to_number(c) {
+    return c(inc)(0)
+}
+
+console.log(church_to_number(three))
+console.log(church_to_number(five))
