@@ -64,5 +64,7 @@ function church_to_number(c) {
     return c(inc)(0)
 }
 
-console.log(church_to_number(three))
-console.log(church_to_number(five))
+//console.log(church_to_number(three))
+//console.log(church_to_number(five))
+
+module.exports = { head, tail, pair}
