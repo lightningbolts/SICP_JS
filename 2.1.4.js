@@ -1,11 +1,11 @@
 const { head, tail, pair } = require(`./2.1.3`)
 
 function show_interval(interval) {
-    console.log(`${lower_bound(interval)}, ${upper_bound(interval)}`)
+    console.log(`${lower_bound2(interval)}, ${upper_bound2(interval)}`)
 }
 
 function add_interval(x, y) {
-    return make_interval(lower_bound(x) + lower_bound(y), upper_bound(x) + upper_bound(y));
+    return make_interval2(lower_bound2(x) + lower_bound2(y), upper_bound2(x) + upper_bound2(y));
 }
 
 function mul_interval(x, y) {
@@ -23,7 +23,19 @@ function div_interval(x, y) {
 }
 
 //Exercise 2.7
+//Only this function is compatible with add_interval
+function make_interval2(x, y) {
+    return pair(x, y)
+}
 
+function lower_bound2(interval) {
+    return head(interval)
+}
+
+function upper_bound2(interval) {
+    return tail(interval)
+}
+//Only this function above is compatible with add_interval
 function make_interval(resistor, tolerance) {
     return pair(resistor, tolerance)
 }
@@ -47,5 +59,7 @@ function upper_bound1(interval) {
     return tail(interval)
 }
 
-show_interval(add_interval(make_interval(6.8, 0.1), make_interval(4.7, 0.05)))
-show_interval(make_interval(6.8, 0.1))
+//show_interval(add_interval(make_interval(6.8, 0.1), make_interval(4.7, 0.05)))
+show_interval(make_interval2(5, 2))
+show_interval(make_interval2(2, 5))
+show_interval(add_interval(make_interval2(5, 2), make_interval2(2, 5)))
