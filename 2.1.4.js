@@ -60,6 +60,19 @@ function upper_bound1(interval) {
 }
 
 //show_interval(add_interval(make_interval(6.8, 0.1), make_interval(4.7, 0.05)))
-show_interval(make_interval2(5, 2))
-show_interval(make_interval2(2, 5))
-show_interval(add_interval(make_interval2(5, 2), make_interval2(2, 5)))
+//show_interval(make_interval2(5, 2))
+//show_interval(make_interval2(2, 5))
+//show_interval(add_interval(make_interval2(5, 2), make_interval2(2, 5)))
+//Exercise 2.8
+
+function sub_interval(x, y) {
+    return make_interval2(Math.abs(lower_bound2(x) - lower_bound2(y)), Math.abs(upper_bound2(x) - upper_bound2(y)));
+}
+
+//show_interval(sub_interval(make_interval2(5, 2), make_interval2(7, 1)))
+//Exercise 2.9
+
+function width_interval(interval) {
+    return (Math.abs(lower_bound2(interval) - upper_bound2(interval))) / 2
+}
+
