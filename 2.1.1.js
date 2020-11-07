@@ -60,8 +60,8 @@ function equal_rat(x, y) {
 }
 
 //console.log(display_frac(add_rat(make_rat(-1, -2), make_rat(1, 2))))
-console.log(display_frac(make_rat(1, 2)))
-console.log(display_frac(make_rat(1, -3)))
+//console.log(display_frac(make_rat(1, 2)))
+//console.log(display_frac(make_rat(1, -3)))
 
 //console.log(equal_rat(make_rat(1, 2), make_rat(1, 3)))
 
