@@ -12,13 +12,44 @@ function add_interval(x, y) {
     return make_interval2(lower_bound2(x) + lower_bound2(y), upper_bound2(x) + upper_bound2(y));
 }
 
-function mul_interval(x, y) {
-    const p1 = lower_bound2(x) * lower_bound2(y);
-    const p2 = lower_bound2(x) * upper_bound2(y);
-    const p3 = upper_bound2(x) * lower_bound2(y);
-    const p4 = upper_bound2(x) * upper_bound2(y);
-    return make_interval2(Math.min(p1, p2, p3, p4),
-        Math.max(p1, p2, p3, p4));
+function p(n) {
+    return n >= 0;
+}
+function n(n) {
+    return ! p(n);
+}
+function the_trouble_maker(xl, xu, yl, yu) {
+    const p1 = xl * yl;
+    const p2 = xl * yu;
+    const p3 = xu * yl;
+    const p4 = xu * yu;
+    make_interval(math_min(p1, p2, p3, p4),
+                  math_max(p1, p2, p3, p4));
+}
+function mul_interval(x, y) {  
+    const xl = lower_bound(x);
+    const xu = upper_bound(x);
+    const yl = lower_bound(y);
+    const yu = upper_bound(y);
+    return p(xl) && p(xu) && p(yl) && p(yu)  
+           ? make_interval(xl * yl, xu * yu)
+           : p(xl) && p(xu) && n(yl) && p(yu)  
+           ? make_interval(xu * yl, xu * yu)
+           : p(xl) && p(xu) && n(yl) && n(yu)  
+           ? make_interval(xu * yl, xl * yu)
+           : n(xl) && p(xu) && p(yl) && p(yu)  
+           ? make_interval(xl * yu, xu * yu)
+           : n(xl) && p(xu) && n(yl) && n(yu)  
+           ? make_interval(xu * yl, xl * yl)
+           : n(xl) && n(xu) && p(yl) && p(yu)  
+           ? make_interval(xl * yu, xu * yl)
+           : n(xl) && n(xu) && n(yl) && p(yu)  
+           ? make_interval(xl * yu, xl * yl)
+           : n(xl) && n(xu) && n(yl) && n(yu)  
+           ? make_interval(xu * yu, xl * yl)
+           : n(xl) && p(xu) && n(yl) && p(yu)  
+           ? the_trouble_maker(xl, xu, yl, yu)
+           : error("lower larger than upper");
 }
 
 function div_interval(x, y) {
