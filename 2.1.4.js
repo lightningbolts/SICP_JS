@@ -16,7 +16,7 @@ function p(n) {
     return n >= 0;
 }
 function n(n) {
-    return ! p(n);
+    return !p(n);
 }
 function the_trouble_maker(xl, xu, yl, yu) {
     const p1 = xl * yl;
@@ -24,32 +24,32 @@ function the_trouble_maker(xl, xu, yl, yu) {
     const p3 = xu * yl;
     const p4 = xu * yu;
     make_interval(math_min(p1, p2, p3, p4),
-                  math_max(p1, p2, p3, p4));
+        math_max(p1, p2, p3, p4));
 }
-function mul_interval(x, y) {  
+function mul_interval(x, y) {
     const xl = lower_bound(x);
     const xu = upper_bound(x);
     const yl = lower_bound(y);
     const yu = upper_bound(y);
-    return p(xl) && p(xu) && p(yl) && p(yu)  
-           ? make_interval(xl * yl, xu * yu)
-           : p(xl) && p(xu) && n(yl) && p(yu)  
-           ? make_interval(xu * yl, xu * yu)
-           : p(xl) && p(xu) && n(yl) && n(yu)  
-           ? make_interval(xu * yl, xl * yu)
-           : n(xl) && p(xu) && p(yl) && p(yu)  
-           ? make_interval(xl * yu, xu * yu)
-           : n(xl) && p(xu) && n(yl) && n(yu)  
-           ? make_interval(xu * yl, xl * yl)
-           : n(xl) && n(xu) && p(yl) && p(yu)  
-           ? make_interval(xl * yu, xu * yl)
-           : n(xl) && n(xu) && n(yl) && p(yu)  
-           ? make_interval(xl * yu, xl * yl)
-           : n(xl) && n(xu) && n(yl) && n(yu)  
-           ? make_interval(xu * yu, xl * yl)
-           : n(xl) && p(xu) && n(yl) && p(yu)  
-           ? the_trouble_maker(xl, xu, yl, yu)
-           : error("lower larger than upper");
+    return p(xl) && p(xu) && p(yl) && p(yu)
+        ? make_interval(xl * yl, xu * yu)
+        : p(xl) && p(xu) && n(yl) && p(yu)
+            ? make_interval(xu * yl, xu * yu)
+            : p(xl) && p(xu) && n(yl) && n(yu)
+                ? make_interval(xu * yl, xl * yu)
+                : n(xl) && p(xu) && p(yl) && p(yu)
+                    ? make_interval(xl * yu, xu * yu)
+                    : n(xl) && p(xu) && n(yl) && n(yu)
+                        ? make_interval(xu * yl, xl * yl)
+                        : n(xl) && n(xu) && p(yl) && p(yu)
+                            ? make_interval(xl * yu, xu * yl)
+                            : n(xl) && n(xu) && n(yl) && p(yu)
+                                ? make_interval(xl * yu, xl * yl)
+                                : n(xl) && n(xu) && n(yl) && n(yu)
+                                    ? make_interval(xu * yu, xl * yl)
+                                    : n(xl) && p(xu) && n(yl) && p(yu)
+                                        ? the_trouble_maker(xl, xu, yl, yu)
+                                        : error("lower larger than upper");
 }
 
 function div_interval(x, y) {
@@ -77,18 +77,6 @@ function upper_bound2(interval) {
     return tail(interval)
 }
 //Only this function above is compatible with add_interval
-/*
-function make_interval(resistor, tolerance) {
-    return pair(resistor, tolerance)
-}
-
-function lower_bound(interval) {
-    return head(interval) - tail(interval) * head(interval)
-}
-
-function upper_bound(interval) {
-    return head(interval) + tail(interval) * head(interval)
-}
 
 function make_interval1(resistor, tolerance) {
     return pair(resistor - tolerance * resistor, resistor + tolerance * resistor)
@@ -100,7 +88,7 @@ function lower_bound1(interval) {
 function upper_bound1(interval) {
     return tail(interval)
 }
-*/
+
 
 //show_interval(add_interval(make_interval(6.8, 0.1), make_interval(4.7, 0.05)))
 //show_interval(make_interval2(5, 2))
@@ -121,3 +109,20 @@ function width_interval(interval) {
 //Exercise 2.10
 show_interval(div_interval(make_interval2(9, 10), make_interval2(10, 10)))
 //show_interval(mul_interval(make_interval2(1, 2), make_interval2(2, 3)))
+//Exercise 2.12
+function make_center_width(c, w) {
+    return make_interval2(c - w, c + w);
+}
+function center(i) {
+    return (lower_bound2(i) + upper_bound2(i)) / 2;
+}
+function width(i) {
+    return (upper_bound2(i) - lower_bound2(i)) / 2;
+}
+
+function make_center_percent(c, p) {
+    return make_interval2(c - c * p, c + c * p)
+}
+
+show_interval(make_center_percent(5, 0.4))
+show_interval(make_center_width(5, 2))
